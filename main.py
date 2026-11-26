@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Entry program for make.fun bounty: Your AI Therapist's Diagnosis.
+"""Entry program for make.fun bounty: Your AI Therapist's Diagnosis
 
 Writes the funniest single-line diagnosis an AI therapist hands its human
 to /output/entry.txt. The line is a deadpan clinical finding whose twist
@@ -20,6 +20,8 @@ def main() -> None:
         raise ValueError(f"entry must be 1-200 chars, got {len(ENTRY)}")
     if not ENTRY.strip():
         raise ValueError("entry must not be only whitespace")
+    if "\n" in ENTRY or "\r" in ENTRY:
+        raise ValueError("entry must be a single line")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(ENTRY)
